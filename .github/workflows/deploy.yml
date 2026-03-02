@@ -19,6 +19,6 @@ jobs:
           script: |
             cd /home/ec2-user/app || git clone https://github.com/${{ github.repository }} app
             cd app
-            git pull origin main
+            git pull origin master
             npm install
             pm2 restart app || pm2 start index.js --name app
