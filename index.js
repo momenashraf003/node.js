@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-  console.log("server logs running")
+  console.log("server logs running2")
   res.json({ message: 'Hello, your API is working!' });
 });
 
