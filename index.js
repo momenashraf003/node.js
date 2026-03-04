@@ -1,3 +1,4 @@
+const { message } = require('prompt');
 const { checkConnection } = require('./db');
 const { checkS3Connection } = require('./s3');
 const express = require('express');
@@ -14,6 +15,7 @@ app.get('/test-connections', async (req, res) => {
   const s3Status = await checkS3Connection();
 
   res.json({
+    message: "Connection Status",
     mysql: dbStatus.success ? 'Connected' : `Failed: ${dbStatus.error}`,
     s3: s3Status.success ? 'Connected' : `Failed: ${s3Status.error}`
   });
