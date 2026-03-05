@@ -17,7 +17,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ec2-user/app || git clone https://github.com/${{ github.repository }} app
+            cd /home/ec2-user/node.js || git clone https://github.com/${{ github.repository }} app
             cd app
             git pull origin master
             npm install
