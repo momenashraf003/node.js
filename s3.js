@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '.env' }); // explicitly load .env from current folder
 const { S3Client, ListBucketsCommand } = require('@aws-sdk/client-s3');
 
 const s3Client = new S3Client({
