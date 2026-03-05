@@ -1,4 +1,3 @@
-const { message } = require('prompt');
 const { checkConnection } = require('./db');
 const { checkS3Connection } = require('./s3');
 const express = require('express');
