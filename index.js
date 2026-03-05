@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-  console.log("server logs running4")
+  console.log("server logs running and .env variables should be loaded");
   res.json({ message: 'Hello, your API is working!' });
 });
 
