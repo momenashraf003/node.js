@@ -6,12 +6,16 @@ const PORT = 3000;
 
 app.get('/', (req, res) => {
   console.log("server logs running and .env variables should be loaded");
+  console.log("ci/cd working successfully");
   res.json({ message: 'Hello, your API is working!' });
 });
 
 app.get('/test-connections', async (req, res) => {
   const dbStatus = await checkConnection();
   const s3Status = await checkS3Connection();
+  console.log("Database Connection Status:", dbStatus);
+  console.log("S3 Connection Status:", s3Status);
+  console.log("ci/cd working successfully");
 
   res.json({
     message: "Connection Status v209",
