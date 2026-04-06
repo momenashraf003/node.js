@@ -14,7 +14,7 @@ app.get('/test-connections', async (req, res) => {
   const s3Status = await checkS3Connection();
 
   res.json({
-    message: "Connection Status v2",
+    message: "Connection Status v209",
     mysql: dbStatus.success ? 'Connected' : `Failed: ${dbStatus.error}`,
     s3: s3Status.success ? 'Connected' : `Failed: ${s3Status.error}`
   });
