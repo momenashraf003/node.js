@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: node_api_service
+    ports:
+      - "3000:3000"
+    # Load environment variables from .env file for local testing
+    # In production (AWS), these are set in the service dashboard (App Runner/ECS)
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      # Use the host's IP/endpoint for DB_HOST if you are connecting to RDS from local
+      # Or if you add a 'db' service here, you'd use that service name.
+
+# Optional: Add a local DB service if you ever want to test offline
+# db:
+#   image: mysql:8
+#   environment:
+#     MYSQL_ROOT_PASSWORD: root
+#     MYSQL_DATABASE: myapp
+#   ports:
+#     - "3306:3306"

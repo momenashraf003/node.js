@@ -17,8 +17,14 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ec2-user/node.js || git clone https://github.com/${{ github.repository }} app
-            cd app
+            # Navigate to the app folder
+            cd /home/ec2-user/node.js || git clone https://github.com/${{ github.repository }} app && cd app
+            
+            # Update the code
             git pull origin master
-            npm install
-            pm2 restart app || pm2 start index.js --name app
+            
+            # Build and Restart using Docker
+            # -d means "detached" (run in background)
+            # --build ensures it rebuilds the image with the new code
+            docker-compose up -d --build
+
