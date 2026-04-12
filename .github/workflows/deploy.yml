@@ -17,19 +17,27 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Ensure the directory exists
             mkdir -p /home/ec2-user/node.js
             cd /home/ec2-user/node.js
             
-            # If the directory is empty, clone the repo
             if [ ! -d ".git" ]; then
               git clone https://github.com/${{ github.repository }} .
             fi
             
-            # Update the code
             git pull origin master
             
-            # Build and Restart using Docker
+            # --- THE FIX: Clear Port 3000 and Old Containers ---
+            # 1. Stop any PM2 process if it exists
+            pm2 stop all || true
+            
+            # 2. Kill anything else on port 3000 (just in case)
+            sudo fuser -k 3000/tcp || true
+            
+            # 3. Stop and remove old docker containers to avoid name conflicts
+            docker-compose down || true
+            
+            # Now start the new one!
             docker-compose up -d --build
+
 
 
