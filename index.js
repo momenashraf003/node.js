@@ -25,5 +25,6 @@ app.get('/test-connections', async (req, res) => {
 });
 
 app.listen(PORT, () => {
+  console.log("Docker running")
   console.log(`Server is running`);
 });
