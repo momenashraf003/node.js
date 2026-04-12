@@ -17,14 +17,19 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Navigate to the app folder
-            cd /home/ec2-user/node.js || git clone https://github.com/${{ github.repository }} app && cd app
+            # Ensure the directory exists
+            mkdir -p /home/ec2-user/node.js
+            cd /home/ec2-user/node.js
+            
+            # If the directory is empty, clone the repo
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/${{ github.repository }} .
+            fi
             
             # Update the code
             git pull origin master
             
             # Build and Restart using Docker
-            # -d means "detached" (run in background)
-            # --build ensures it rebuilds the image with the new code
             docker-compose up -d --build
+
 
